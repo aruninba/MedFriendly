@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Medfriendly</string>
+
+
+    <string-array name="nav_drawer_labels">
+        <item>Home</item>
+        <item>Reminder</item>
+        <item>Water intake</item>
+        <item>UF calculator</item>
+        <item>Dialysis</item>
+        <item>Treatment Monitor</item>
+        <item>Settings</item>
+    </string-array>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>

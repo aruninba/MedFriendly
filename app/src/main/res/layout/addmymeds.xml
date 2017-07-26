@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinateAddmed"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/toolbarMeds"
+        layout="@layout/toolbar" />
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="60dp"
+        android:fillViewport="true">
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="10dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/medication_edt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Medicine Name"
+                        android:singleLine="true"
+                        android:inputType="textCapCharacters"
+                        android:textColor="#000000"
+                        android:textSize="18dp">
+
+                        <requestFocus />
+                    </AutoCompleteTextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Reminder"
+                                android:textColor="@color/black"
+                                android:textSize="18dp" />
+
+                            <Switch
+                                android:id="@+id/switch_reminder"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true" />
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:id="@+id/message_list1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+
+                            <Spinner
+                                android:id="@+id/frequency_list"
+                                android:layout_width="fill_parent"
+                                android:layout_height="60dp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@android:color/transparent"
+                                android:overlapAnchor="false"
+                                android:spinnerMode="dropdown"></Spinner>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right|center"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/arrowtodown" />
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <RelativeLayout
+                            android:id="@+id/time_relative1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp">
+
+                            <ImageView
+                                android:id="@+id/clock"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/clock" />
+
+
+                            <TextView
+                                android:id="@+id/time_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@id/clock"
+                                android:text="08:00"
+                                android:textColor="#1875D2"
+                                android:textSize="18dp" />
+
+
+                            <TextView
+                                android:id="@+id/dosage1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:text="Take 1"
+                                android:textColor="#1875D2"
+                                android:textSize="18dp" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/time_relative2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp">
+
+                            <ImageView
+                                android:id="@+id/clock2"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/clock" />
+
+                            <TextView
+                                android:id="@+id/time_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@id/clock2"
+                                android:text="11:00"
+                                android:textColor="#1875D2"
+                                android:textSize="18dp" />
+
+
+                            <TextView
+                                android:id="@+id/dosage2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginLeft="10dp"
+                                android:text="Take 1"
+                                android:textColor="#1875D2"
+                                android:textSize="18dp" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/time_relative3"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp">
+
+                            <ImageView
+                                android:id="@+id/clock3"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/clock" />
+
+                            <TextView
+                                android:id="@+id/time_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@id/clock3"
+                                android:text="14:00"
+                                android:textColor="#1875D2"
+                                android:textSize="18dp" />
+
+
+                            <TextView
+                                android:id="@+id/dosage3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginLeft="10dp"
+                                android:text="Take 1"
+                                android:textColor="#1875D2"
+                                android:textSize="18dp" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/time_relative4"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp">
+
+                            <ImageView
+                                android:id="@+id/clock4"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/clock" />
+
+                            <TextView
+                                android:id="@+id/time_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@id/clock4"
+                                android:text="15:00"
+                                android:textColor="#1875D2"
+                                android:textSize="18dp" />
+
+
+                            <TextView
+                                android:id="@+id/dosage4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginLeft="10dp"
+                                android:text="Take 1"
+                                android:textColor="#1875D2"
+                                android:textSize="18dp" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/time_relative5"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp">
+
+                            <ImageView
+                                android:id="@+id/clock5"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/clock" />
+
+                            <TextView
+                                android:id="@+id/time_5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@id/clock5"
+                                android:text="20:00"
+                                android:textColor="#1875D2"
+                                android:textSize="18dp" />
+
+
+                            <TextView
+                                android:id="@+id/dosage5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginLeft="10dp"
+                                android:text="Take 1"
+                                android:textColor="#1875D2"
+                                android:textSize="18dp" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/schedule_ll"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="10dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Schedule"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+
+                    <TextView
+                        android:id="@+id/schedule_startdate_tv"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Start date"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="2dp"
+                        android:layout_margin="10dp"
+                        android:background="#80c1c1c1" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Duration of medication"
+                            android:textColor="#000000"
+                            android:textSize="20dp" />
+
+                        <RadioButton
+                            android:id="@+id/radio_continuous"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:checked="true"
+                            android:text="Continuous"
+                            android:textSize="18dp" />
+
+
+                        <RadioButton
+                            android:id="@+id/radio_numberofdays"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Number of days"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>
