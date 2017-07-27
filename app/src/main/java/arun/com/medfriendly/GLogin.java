@@ -7,6 +7,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -26,17 +32,23 @@ import utilities.Globalpreferences;
 public class GLogin extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private SignInButton btnSignIn;
+    private LoginButton loginButton;
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 007;
     private ProgressDialog mProgressDialog;
     private Globalpreferences globalpreferences;
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.glogin);
         btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
         btnSignIn.setOnClickListener(this);
+        /*loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email");
+        callbackManager = CallbackManager.Factory.create();*/
         globalpreferences = Globalpreferences.getInstances(GLogin.this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -50,6 +62,24 @@ public class GLogin extends AppCompatActivity implements View.OnClickListener, G
         // Customizing G+ button
         btnSignIn.setSize(SignInButton.SIZE_STANDARD);
         btnSignIn.setScopes(gso.getScopeArray());
+
+       /* // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });*/
     }
 
     private void signIn() {
@@ -63,8 +93,10 @@ public class GLogin extends AppCompatActivity implements View.OnClickListener, G
             GoogleSignInAccount acct = result.getSignInAccount();
 
             globalpreferences.putString("username",acct.getDisplayName());
-            globalpreferences.putString("photo",acct.getPhotoUrl().toString());
             globalpreferences.putString("email",acct.getEmail());
+            if ((globalpreferences.getInt("isPhotochanged") != 1) || !(globalpreferences.getString("email").equalsIgnoreCase(acct.getEmail()))) {
+                globalpreferences.putString("photo",acct.getPhotoUrl().toString());
+            }
             Intent in = new Intent(GLogin.this, MainNavigationDrawer.class);
             startActivity(in);
 
@@ -92,7 +124,9 @@ public class GLogin extends AppCompatActivity implements View.OnClickListener, G
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
-        }
+        }/*else {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }*/
     }
 
     @Override

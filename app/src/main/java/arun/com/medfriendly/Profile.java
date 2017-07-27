@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,10 +13,13 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +30,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,6 +38,7 @@ import java.util.Map;
 
 import utilities.Constants;
 import utilities.Globalpreferences;
+import utilities.Utils;
 
 /**
  * Created by arun_i on 25-Jul-17.
@@ -41,10 +47,12 @@ import utilities.Globalpreferences;
 public class Profile extends AppCompatActivity {
     private ImageView profileView;
     private Toolbar toolbar;
-    private EditText nameEt,phoneEt,emailEt;
+    private EditText nameEt, phoneEt, emailEt;
     private FloatingActionButton fab;
     Globalpreferences globalpreferences;
     Uri fileUri;
+    Bitmap bitmap;
+    private CoordinatorLayout coordinatorLayout;
 
 
     @Override
@@ -66,6 +74,7 @@ public class Profile extends AppCompatActivity {
         emailEt = (EditText) findViewById(R.id.emailEt);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         profileView = (ImageView) findViewById(R.id.imageView);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinateProfile);
         globalpreferences = Globalpreferences.getInstances(Profile.this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -90,19 +99,8 @@ public class Profile extends AppCompatActivity {
         nameEt.setText(globalpreferences.getString("username"));
         emailEt.setText(globalpreferences.getString("email"));
         if (globalpreferences.getInt("isPhotochanged") == 1) {
-            Uri uri = Uri.parse(globalpreferences.getString("photo"));
-            System.out.println("uri"+uri);
-//            try {
-//                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-             //   profileView.setImageURI(uri);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-            Glide.with(Profile.this)
-                    .load(new File(uri.getPath()))
-                    .into(profileView);
-
+            Bitmap bitmap1 = Utils.StringToBitMap(globalpreferences.getString("photo"));
+            profileView.setImageBitmap(bitmap1);
         } else {
             Glide.with(Profile.this).load(globalpreferences.getString("photo"))
                     .thumbnail(0.5f)
@@ -157,20 +155,20 @@ public class Profile extends AppCompatActivity {
         }
         if (requestCode == Constants.CHOOSE_IMAGE_REQUEST_CODE && data != null) {
             fileUri = data.getData();
-            System.out.println("picked"+fileUri);
+            System.out.println("picked" + fileUri);
             try {
-                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(), fileUri);
-                profileView.setImageBitmap(bm);
-                globalpreferences.putInt("isPhotochanged",1);
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), fileUri);
+                profileView.setImageBitmap(bitmap);
+                globalpreferences.putInt("isPhotochanged", 1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
         } else if (requestCode == Constants.TAKE_IMAGE_REQUEST_CODE) {
             try {
-                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(), fileUri);
-                profileView.setImageBitmap(bm);
-                globalpreferences.putInt("isPhotochanged",1);
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), fileUri);
+                profileView.setImageBitmap(bitmap);
+                globalpreferences.putInt("isPhotochanged", 1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -193,7 +191,7 @@ public class Profile extends AppCompatActivity {
                 onBackPressed();
                 return true;
             case R.id.save_reminder:
-               saveProfile();
+                saveProfile();
                 return true;
             default:
                 break;
@@ -202,13 +200,14 @@ public class Profile extends AppCompatActivity {
     }
 
     private void saveProfile() {
-        globalpreferences.putString("username",nameEt.getText().toString());
-        if(globalpreferences.getInt("isPhotochanged") == 1) {
-            System.out.println("changed"+fileUri);
-            globalpreferences.putString("photo", fileUri.toString());
+        globalpreferences.putString("username", nameEt.getText().toString());
+        if (globalpreferences.getInt("isPhotochanged") == 1) {
+            globalpreferences.putString("photo", Utils.BitMapToString(bitmap));
         }
-        globalpreferences.putString("email",emailEt.getText().toString());
-        globalpreferences.putString("profileNumber",phoneEt.getText().toString());
+        globalpreferences.putString("email", emailEt.getText().toString());
+        globalpreferences.putString("profileNumber", phoneEt.getText().toString());
+        Snackbar snackbar = Snackbar.make(coordinatorLayout,"Profile saved Successfully",Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 
 
@@ -240,10 +239,9 @@ public class Profile extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,String[] permissions,int[] grantResults) {
-        switch (requestCode){
-            case Constants.PHOTOPERMISSION:
-            {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Constants.PHOTOPERMISSION: {
                 Map<String, Integer> perms = new HashMap<String, Integer>();
                 // Initial
                 perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
@@ -269,4 +267,5 @@ public class Profile extends AppCompatActivity {
 
         }
     }
+
 }
