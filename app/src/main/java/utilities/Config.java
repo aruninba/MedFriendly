@@ -7,6 +7,8 @@ package utilities;
 
 public class Config {
 
+    //admob:::ca-app-pub-5196489113179685~8798505821
+
     // global topic to receive app wide push notifications
     public static final String TOPIC_GLOBAL = "global";
 
