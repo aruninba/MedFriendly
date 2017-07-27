@@ -10,10 +10,12 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.internal.Utility;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import io.fabric.sdk.android.Fabric;
 import utilities.Config;
 import utilities.NotificationUtils;
 
@@ -26,6 +28,7 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.splashscreen);
         ShimmerFrameLayout layout = (ShimmerFrameLayout) findViewById(R.id.shimmerlayout);
         layout.startShimmerAnimation();
@@ -42,6 +45,7 @@ public class SplashScreen extends AppCompatActivity {
             }
         };
         thread.start();
+        //throw new RuntimeException("this is a crash");
     }
 
 
