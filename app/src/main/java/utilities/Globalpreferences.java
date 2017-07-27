@@ -24,7 +24,6 @@ public class Globalpreferences {
     }
 
     public void putString(String key, String value){
-        System.out.println("value"+value);
         SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
         prefsEditor.putString(key, value);
         prefsEditor.commit();
@@ -35,5 +34,19 @@ public class Globalpreferences {
             return sharedPreferences.getString(key, "");
         }
         return "";
+    }
+
+    public void putInt(String key, Integer value){
+        SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+        prefsEditor.putInt(key, value);
+        prefsEditor.commit();
+    }
+
+
+    public Integer getInt(String key) {
+        if (sharedPreferences != null) {
+            return sharedPreferences.getInt(key,9999999);
+        }
+        return 9999999;
     }
 }

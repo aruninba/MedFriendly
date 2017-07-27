@@ -5,7 +5,6 @@ package arun.com.medfriendly;
  */
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -21,20 +20,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import adapter.NavigationDrawerAdapter;
 import model.NavDrawerItem;
+import utilities.Globalpreferences;
 
 
 public class FragmentDrawer extends Fragment {
-
-    private static String TAG = FragmentDrawer.class.getSimpleName();
-
-    private static final String MY_PREFS_NAME = "Myprefsfile";
-    SharedPreferences fragmentdrawer_sharedpreference;
-    SharedPreferences.Editor fragementdrawer_edit;
 
     private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -47,6 +44,7 @@ public class FragmentDrawer extends Fragment {
     ImageView img_user;
     String managername;
     TextView driver_name;
+    Globalpreferences globalpreferences;
 
     public FragmentDrawer() {
 
@@ -77,9 +75,8 @@ public class FragmentDrawer extends Fragment {
         super.onCreate(savedInstanceState);
 
         // drawer labels
+        globalpreferences = Globalpreferences.getInstances(getActivity());
         titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels);
-        fragmentdrawer_sharedpreference = getActivity().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
-        fragementdrawer_edit = fragmentdrawer_sharedpreference.edit();
         images.clear();
         images.add(R.drawable.dashboard_icon);
         images.add(R.drawable.reminder_icon);
@@ -101,13 +98,18 @@ public class FragmentDrawer extends Fragment {
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
         driver_name = (TextView) layout.findViewById(R.id.driver_name_main);
         img_user = (ImageView) layout.findViewById(R.id.imageView);
-        managername = fragmentdrawer_sharedpreference.getString("login_ownername", "");
-
+        managername = globalpreferences.getString("username");
         if (managername != null && !managername.isEmpty()) {
             driver_name.setText(managername);
         } else {
-            driver_name.setText("Patient name");
+            driver_name.setText("Guest user");
         }
+
+        Glide.with(getActivity()).load(globalpreferences.getString("photo"))
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(img_user);
 
         adapter = new NavigationDrawerAdapter(getActivity(), getData(), images);
         recyclerView.setAdapter(adapter);

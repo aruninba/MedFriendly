@@ -103,8 +103,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
         // Create Notification
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
-                .setSmallIcon(R.drawable.alarm)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.medicon))
+                .setSmallIcon(R.mipmap.medicon)
                 .setContentTitle(context.getResources().getString(R.string.app_name))
                 .setTicker(mTitle)
                 .setContentText(mContent)
