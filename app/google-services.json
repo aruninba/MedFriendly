@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "747475396340",
+    "firebase_url": "https://medfriendly-199e0.firebaseio.com",
+    "project_id": "medfriendly-199e0",
+    "storage_bucket": "medfriendly-199e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747475396340:android:9a2ca888d82522de",
+        "android_client_info": {
+          "package_name": "arun.com.medfriendly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747475396340-07595knikomd0ua8915kitk279fg2fu8.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "747475396340-om0nv7s64pqr43bbq7cgqvdiag9aooha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "arun.com.medfriendly",
+            "certificate_hash": "99a2d4c913f8d6c94b9a1c36118ec497a4cc8c0a"
+          }
+        },
+        {
+          "client_id": "747475396340-1vl0685gqdapkujk2jaong765rpg6nka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB47lpyl7YsjXyDUjllHX-Hw2UAfbxRZi8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747475396340-07595knikomd0ua8915kitk279fg2fu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

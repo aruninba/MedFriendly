@@ -5,6 +5,7 @@ package arun.com.medfriendly;
  */
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -29,6 +30,7 @@ import java.util.List;
 import adapter.NavigationDrawerAdapter;
 import model.NavDrawerItem;
 import utilities.Globalpreferences;
+import utilities.Utils;
 
 
 public class FragmentDrawer extends Fragment {
@@ -104,12 +106,8 @@ public class FragmentDrawer extends Fragment {
         } else {
             driver_name.setText("Guest user");
         }
+       changePhoto();
 
-        Glide.with(getActivity()).load(globalpreferences.getString("photo"))
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(img_user);
 
         adapter = new NavigationDrawerAdapter(getActivity(), getData(), images);
         recyclerView.setAdapter(adapter);
@@ -120,6 +118,7 @@ public class FragmentDrawer extends Fragment {
                 drawerListener.onDrawerItemSelected(view, position);
                 mDrawerLayout.closeDrawer(containerView);
                 adapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -131,6 +130,19 @@ public class FragmentDrawer extends Fragment {
         return layout;
     }
 
+    private void changePhoto() {
+        if (globalpreferences.getInt("isPhotochanged") == 1) {
+            Bitmap bitmap1 = Utils.StringToBitMap(globalpreferences.getString("photo"));
+            img_user.setImageBitmap(bitmap1);
+        } else {
+            Glide.with(getActivity()).load(globalpreferences.getString("photo"))
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(img_user);
+        }
+    }
+
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
         containerView = getActivity().findViewById(fragmentId);
@@ -140,6 +152,7 @@ public class FragmentDrawer extends Fragment {
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 getActivity().invalidateOptionsMenu();
+                changePhoto();
             }
 
             @Override
