@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,7 +39,7 @@ public class HomeFragment extends Fragment {
     private String date;
     static int finishedColor;
     ArrayList<Dialysis> dialysisReminder = new ArrayList<>();
-
+    private AdView mAdView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.homepage, container, false);
@@ -96,6 +99,11 @@ public class HomeFragment extends Fragment {
         sdf = new SimpleDateFormat("dd-MM-yyyy");
         calendar = Calendar.getInstance();
         date = sdf.format(calendar.getTime());
+
+        mAdView = (AdView) rootView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mAdView.loadAd(adRequest);
     }
 
     public static int getFinishedColor() {
@@ -107,5 +115,29 @@ public class HomeFragment extends Fragment {
             finishedColor = -12414479;
         }
         return finishedColor;
+    }
+
+    @Override
+    public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
     }
 }

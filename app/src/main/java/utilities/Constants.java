@@ -15,4 +15,7 @@ public class Constants {
     public static final byte CAMERA = 1;
     public static final byte CHOOSE_IMAGE_REQUEST_CODE = 100;
     public static final byte TAKE_IMAGE_REQUEST_CODE = 101;
+
+    //App ID: ca-app-pub-5196489113179685~8798505821
+    //Ad unit ID: ca-app-pub-5196489113179685/7023239786
 }
