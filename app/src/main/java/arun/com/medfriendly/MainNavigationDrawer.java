@@ -24,6 +24,7 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
     String savedtitle;
     boolean doubleBackToExitPressedOnce = false;
     Globalpreferences globalpreferences;
+    public static MainNavigationDrawer mainNavigationDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
         a_toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(a_toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        mainNavigationDrawer = this;
         a_fragmentDrawer = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         a_fragmentDrawer.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), a_toolbar);
         a_fragmentDrawer.setDrawerListener(this);
@@ -56,7 +58,7 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
 
                 fragment = new HomeFragment();
                 title = "Home";
-                globalpreferences.putString("selectedClass","Home");
+                globalpreferences.putString("selectedClass", "Home");
 
                 break;
 
@@ -64,36 +66,36 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
 
                 fragment = new MymedsFragment();
                 title = "My Meds";
-                globalpreferences.putString("selectedClass","Reminder");
+                globalpreferences.putString("selectedClass", "Reminder");
                 break;
             case 2:
 
                 fragment = new WaterFragment();
                 title = "Water Intake Monitor";
-                globalpreferences.putString("selectedClass","Water intake");
+                globalpreferences.putString("selectedClass", "Water intake");
                 break;
             case 3:
                 fragment = new UFcalculator();
                 title = "UF Calculator";
-                globalpreferences.putString("selectedClass","UF calculator");
+                globalpreferences.putString("selectedClass", "UF calculator");
                 break;
 
             case 4:
                 fragment = new DialysisReminder();
-                globalpreferences.putString("selectedClass","Dialysis");
+                globalpreferences.putString("selectedClass", "Dialysis");
                 title = "Dialysis Reminder";
 
                 break;
 
             case 5:
                 fragment = new UFcalculator();
-                globalpreferences.putString("selectedClass","Treatment Monitor");
+                globalpreferences.putString("selectedClass", "Treatment Monitor");
                 title = "Settings";
 
                 break;
             case 6:
                 fragment = new Settings();
-                globalpreferences.putString("selectedClass","Settings");
+                globalpreferences.putString("selectedClass", "Settings");
                 title = "Settings";
                 break;
             case 7:
@@ -121,7 +123,7 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
 
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
@@ -137,6 +139,17 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+    public String currentFragment() {
+        String frag = "";
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.container_body);
+        if (f instanceof HomeFragment) {
+            frag = "HomeFragment";
+        } else if (f instanceof WaterFragment) {
+            frag = "WaterFragment";
+        }
+        return frag;
     }
 
 

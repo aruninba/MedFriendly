@@ -96,7 +96,7 @@ public class WaterFragment extends Fragment {
                         double noOfCupsPerDay = Double.valueOf(waterLimitStr) / Double.valueOf(cupLevelStr);
                         double progressPerCup = 100 / noOfCupsPerDay;
                         stopPosition += (int) progressPerCup;
-                        System.out.println("stoppo"+stopPosition);
+                        System.out.println("stoppo" + stopPosition);
                         ObjectAnimator anim = ObjectAnimator.ofInt(circularProgress, "progress", startPosition, stopPosition);
                         anim.setInterpolator(new DecelerateInterpolator());
                         anim.setDuration(800);

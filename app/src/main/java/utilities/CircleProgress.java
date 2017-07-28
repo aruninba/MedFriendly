@@ -13,8 +13,11 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
+import arun.com.medfriendly.HomeFragment;
+import arun.com.medfriendly.MainNavigationDrawer;
 import arun.com.medfriendly.R;
 import arun.com.medfriendly.WaterFragment;
+import model.Waterintake;
 
 
 /**
@@ -219,7 +222,12 @@ public class CircleProgress extends View {
 
         canvas.save();
         canvas.rotate(180, getWidth() / 2, getHeight() / 2);
-        paint.setColor(WaterFragment.getFinishedColor());
+        String fragment = MainNavigationDrawer.mainNavigationDrawer.currentFragment();
+        if(fragment.equalsIgnoreCase("HomeFragment")){
+            paint.setColor(HomeFragment.getFinishedColor());
+        }else {
+            paint.setColor(WaterFragment.getFinishedColor());
+        }
         canvas.drawArc(rectF, 270 - angle, angle * 2, false, paint);
         canvas.restore();
 
