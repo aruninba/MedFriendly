@@ -282,31 +282,31 @@ public class AddDialysis extends AppCompatActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.day0:
                 setDayBackground(sunBtn);
-                selectedDay = 0;
+                selectedDay = 1;
                 return;
             case R.id.day1:
                 setDayBackground(monBtn);
-                selectedDay = 1;
+                selectedDay = 2;
                 return;
             case R.id.day2:
                 setDayBackground(tuesBtn);
-                selectedDay = 2;
+                selectedDay = 3;
                 return;
             case R.id.day3:
                 setDayBackground(wedBtn);
-                selectedDay = 3;
+                selectedDay = 4;
                 return;
             case R.id.day4:
                 setDayBackground(thuBtn);
-                selectedDay = 4;
+                selectedDay = 5;
                 return;
             case R.id.day5:
                 setDayBackground(friBtn);
-                selectedDay = 5;
+                selectedDay = 6;
                 return;
             case R.id.day6:
                 setDayBackground(satBtn);
-                selectedDay = 6;
+                selectedDay = 7;
                 return;
         }
 
