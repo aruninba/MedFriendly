@@ -17,4 +17,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="facebook_app_id">511250552545146</string>
     <string name="fb_login_protocol_scheme">fb511250552545146</string>
+
+
+
+    <string name="firstadd">ca-app-pub-5196489113179685/7569362245</string>
+    <string name="firstleveladd">ca-app-pub-5196489113179685/7023239786</string>
 </resources>
