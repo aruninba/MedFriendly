@@ -429,7 +429,7 @@ public class Addmymeds extends AppCompatActivity {
      */
     private void updateEdittextAdapter(ArrayList<String> medicines) {
         dataAdapter = new ArrayAdapter<String>
-                (Addmymeds.this, R.layout.post_spinner, R.id.textView, medicines);
+                (Addmymeds.this, R.layout.post_spinner, R.id.textview, medicines);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         medication_ed.setThreshold(1);
         medication_ed.setAdapter(dataAdapter);

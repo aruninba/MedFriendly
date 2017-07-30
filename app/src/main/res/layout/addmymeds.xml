@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <AutoCompleteTextView
+                    <AutoCompleteutilities.CustomText
                         android:id="@+id/medication_edt"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                         android:textSize="18dp">
 
                         <requestFocus />
-                    </AutoCompleteTextView>
+                    </AutoCompleteutilities.CustomText>
 
                 </LinearLayout>
 
@@ -71,7 +71,7 @@
                             android:layout_marginTop="10dp"
                             android:orientation="horizontal">
 
-                            <TextView
+                            <utilities.CustomText
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -134,7 +134,7 @@
                                 android:src="@drawable/clock" />
 
 
-                            <TextView
+                            <utilities.CustomText
                                 android:id="@+id/time_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
                                 android:textSize="18dp" />
 
 
-                            <TextView
+                            <utilities.CustomText
                                 android:id="@+id/dosage1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
                                 android:layout_height="25dp"
                                 android:src="@drawable/clock" />
 
-                            <TextView
+                            <utilities.CustomText
                                 android:id="@+id/time_2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
                                 android:textSize="18dp" />
 
 
-                            <TextView
+                            <utilities.CustomText
                                 android:id="@+id/dosage2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -213,7 +213,7 @@
                                 android:layout_height="25dp"
                                 android:src="@drawable/clock" />
 
-                            <TextView
+                            <utilities.CustomText
                                 android:id="@+id/time_3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -225,7 +225,7 @@
                                 android:textSize="18dp" />
 
 
-                            <TextView
+                            <utilities.CustomText
                                 android:id="@+id/dosage3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -252,7 +252,7 @@
                                 android:layout_height="25dp"
                                 android:src="@drawable/clock" />
 
-                            <TextView
+                            <utilities.CustomText
                                 android:id="@+id/time_4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -264,7 +264,7 @@
                                 android:textSize="18dp" />
 
 
-                            <TextView
+                            <utilities.CustomText
                                 android:id="@+id/dosage4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -291,7 +291,7 @@
                                 android:layout_height="25dp"
                                 android:src="@drawable/clock" />
 
-                            <TextView
+                            <utilities.CustomText
                                 android:id="@+id/time_5"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -303,7 +303,7 @@
                                 android:textSize="18dp" />
 
 
-                            <TextView
+                            <utilities.CustomText
                                 android:id="@+id/dosage5"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -344,7 +344,7 @@
                     android:background="#FFFFFF"
                     android:orientation="vertical">
 
-                    <TextView
+                    <utilities.CustomText
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="Schedule"
@@ -352,7 +352,7 @@
                         android:textSize="20dp" />
 
 
-                    <TextView
+                    <utilities.CustomText
                         android:id="@+id/schedule_startdate_tv"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -373,7 +373,7 @@
                         android:orientation="vertical">
 
 
-                        <TextView
+                        <utilities.CustomText
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:text="Duration of medication"

@@ -35,7 +35,7 @@
                     android:layout_margin="10dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <utilities.CustomText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Enter cup size:"
@@ -51,7 +51,7 @@
                         android:inputType="number"
                         android:hint="100 ML" />
 
-                    <TextView
+                    <utilities.CustomText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"

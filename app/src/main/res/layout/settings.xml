@@ -37,7 +37,7 @@
                     android:layout_weight="0.5"
                     android:src="@drawable/dashboard_icon"/>
 
-                <TextView
+                <utilities.CustomText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -79,7 +79,7 @@
                     android:layout_weight="0.5"
                     android:src="@drawable/treatment_icon"/>
 
-                <TextView
+                <utilities.CustomText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -123,7 +123,7 @@
                     android:layout_weight="0.5"
                     android:src="@drawable/terms"/>
 
-                <TextView
+                <utilities.CustomText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -169,7 +169,7 @@
                     android:layout_weight="0.5"
                     android:src="@drawable/unsubscribe"/>
 
-                <TextView
+                <utilities.CustomText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -196,7 +196,7 @@
             android:layout_height="fill_parent"
             android:gravity="bottom|center_horizontal"
             android:layout_gravity="center_horizontal">
-            <TextView
+            <utilities.CustomText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/version_txt"

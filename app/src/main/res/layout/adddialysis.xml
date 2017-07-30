@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
+                <utilities.CustomText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Select Dialysis Days:"
@@ -125,7 +125,7 @@
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <utilities.CustomText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Select Time:"
@@ -149,7 +149,7 @@
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <utilities.CustomText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Enter hospital name:"
@@ -175,7 +175,7 @@
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <utilities.CustomText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Remind me:"

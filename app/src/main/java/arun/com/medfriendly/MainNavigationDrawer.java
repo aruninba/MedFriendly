@@ -89,16 +89,22 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
 
             case 5:
                 fragment = new UFcalculator();
-                globalpreferences.putString("selectedClass", "Treatment Monitor");
-                title = "Settings";
+                globalpreferences.putString("selectedClass", "Hospitals");
+                title = "Hospitals";
 
                 break;
             case 6:
+                fragment = new UFcalculator();
+                globalpreferences.putString("selectedClass", "Treatment Monitor");
+                title = "Treatment Monitor";
+
+                break;
+            case 7:
                 fragment = new Settings();
                 globalpreferences.putString("selectedClass", "Settings");
                 title = "Settings";
                 break;
-            case 7:
+            case 8:
 
                /* fragment = new Profile();
                 globalpreferences.putString("selectedClass","Profile");
@@ -131,7 +137,6 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
 
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
         new Handler().postDelayed(new Runnable() {
 
             @Override
@@ -151,6 +156,18 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
         }
         return frag;
     }
+
+
+/*
+    public void switchFragments(){
+        Fragment fragment = new WaterFragment();
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_body, fragment);
+        fragmentTransaction.commit();
+        getSupportActionBar().setTitle(title);
+    }
+*/
 
 
 }

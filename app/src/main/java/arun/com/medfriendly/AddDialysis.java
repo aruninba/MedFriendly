@@ -166,7 +166,7 @@ public class AddDialysis extends AppCompatActivity implements View.OnClickListen
 
     private void updateEdittextAdapter(ArrayList<String> filterHospital) {
         dataAdapter = new ArrayAdapter<String>
-                (AddDialysis.this, R.layout.post_spinner, R.id.textView, filterHospital);
+                (AddDialysis.this, R.layout.post_spinner, R.id.textview, filterHospital);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         diaHospitalEt.setThreshold(1);
         diaHospitalEt.setAdapter(dataAdapter);

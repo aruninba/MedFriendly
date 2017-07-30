@@ -39,7 +39,7 @@
                 android:layout_toRightOf="@+id/thumbnail_image"
                 android:orientation="vertical">
 
-                <TextView
+                <utilities.CustomText
                     android:id="@+id/medname"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                     android:text="Paracetamol"
                     android:textSize="18dp" />
 
-                <TextView
+                <utilities.CustomText
                     android:id="@+id/medfrequency"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

@@ -2,17 +2,29 @@ package arun.com.medfriendly;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.opengl.GLDebugHelper;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -23,7 +35,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import utilities.Globalpreferences;
+
+import static arun.com.medfriendly.R.id.imageView;
 
 /**
  * Created by arun_i on 26-Jul-17.
@@ -38,6 +55,8 @@ public class GLogin extends AppCompatActivity implements View.OnClickListener, G
     private ProgressDialog mProgressDialog;
     private Globalpreferences globalpreferences;
     CallbackManager callbackManager;
+    BottomSheetBehavior bottomSheetBehavior;
+    Button loginInitiate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +65,28 @@ public class GLogin extends AppCompatActivity implements View.OnClickListener, G
         setContentView(R.layout.glogin);
         btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
         btnSignIn.setOnClickListener(this);
-        /*loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("email");
-        callbackManager = CallbackManager.Factory.create();*/
+
+        loginInitiate = (Button) findViewById(R.id.logininitiate);
+        callbackManager = CallbackManager.Factory.create();
         globalpreferences = Globalpreferences.getInstances(GLogin.this);
+
+        loginInitiate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginInitiate.setVisibility(View.GONE);
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+            }
+        });
+
+
+        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottomSheetLayout));
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -60,14 +97,46 @@ public class GLogin extends AppCompatActivity implements View.OnClickListener, G
                 .build();
 
         // Customizing G+ button
-        btnSignIn.setSize(SignInButton.SIZE_STANDARD);
+        btnSignIn.setSize(SignInButton.SIZE_WIDE);
         btnSignIn.setScopes(gso.getScopeArray());
 
-       /* // Callback registration
+        // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
+                AccessToken accessToken = loginResult.getAccessToken();
+                GraphRequest request = GraphRequest.newMeRequest(
+                        accessToken,
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(
+                                    JSONObject object,
+                                    GraphResponse response) {
+                                try {
+
+                                    String userID = (String) object.get("id");
+                                    String userName = (String) object.get("name");
+                                    String ing = "https://graph.facebook.com/" + userID + "/picture?type=large";
+                                    System.out.println("facebook name" + userName);
+                                    globalpreferences.putString("username", userName);
+                                    // globalpreferences.putString("email",acct.getEmail());
+                                    // if ((globalpreferences.getInt("isPhotochanged") != 1) || !(globalpreferences.getString("email").equalsIgnoreCase(acct.getEmail()))) {
+                                    globalpreferences.putString("photo", ing);
+                                    //   }
+                                    Intent in = new Intent(GLogin.this, MainNavigationDrawer.class);
+                                    startActivity(in);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,link,birthday,picture");
+                request.setParameters(parameters);
+                request.executeAsync();
             }
 
             @Override
@@ -79,7 +148,7 @@ public class GLogin extends AppCompatActivity implements View.OnClickListener, G
             public void onError(FacebookException exception) {
                 // App code
             }
-        });*/
+        });
     }
 
     private void signIn() {
@@ -92,10 +161,10 @@ public class GLogin extends AppCompatActivity implements View.OnClickListener, G
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
 
-            globalpreferences.putString("username",acct.getDisplayName());
-            globalpreferences.putString("email",acct.getEmail());
+            globalpreferences.putString("username", acct.getDisplayName());
+            globalpreferences.putString("email", acct.getEmail());
             if ((globalpreferences.getInt("isPhotochanged") != 1) || !(globalpreferences.getString("email").equalsIgnoreCase(acct.getEmail()))) {
-                globalpreferences.putString("photo",acct.getPhotoUrl().toString());
+                globalpreferences.putString("photo", acct.getPhotoUrl().toString());
             }
             Intent in = new Intent(GLogin.this, MainNavigationDrawer.class);
             startActivity(in);
@@ -124,9 +193,9 @@ public class GLogin extends AppCompatActivity implements View.OnClickListener, G
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
-        }/*else {
+        } else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
-        }*/
+        }
     }
 
     @Override

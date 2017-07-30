@@ -11,6 +11,7 @@ public class Constants {
     public static final String govData = "c1b1d5584c659d53bda43b957bf10a19";
     public static final byte PERMISSION_REQUEST_CODE = 101;
     public static final byte PHOTOPERMISSION = 102;
+    public static final byte HOMEPERMISSION = 102;
     public static final byte FILE_CHOOSER = 0;
     public static final byte CAMERA = 1;
     public static final byte CHOOSE_IMAGE_REQUEST_CODE = 100;
