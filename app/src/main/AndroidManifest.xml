@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="arun.com.medfriendly">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -31,7 +32,7 @@
         </activity>
 
         <activity
-            android:name=".GLogin"
+            android:name=".Login"
             android:screenOrientation="portrait" />
 
         <activity
@@ -89,7 +90,9 @@
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:theme="@style/FullyTranslucent"
+            tools:replace="android:theme"/>
 
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
@@ -103,6 +106,10 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="4c62c38c5afaee64c25457947c997d0d7eb65b44" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key"/>
     </application>
 
 </manifest>

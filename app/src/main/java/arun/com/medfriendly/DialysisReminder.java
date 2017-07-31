@@ -69,7 +69,13 @@ public class DialysisReminder extends Fragment {
         rootView = inflater.inflate(R.layout.dialysisreminder, container, false);
         initializeView();
         updateAdapter();
-        readHospitalCSV();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                readHospitalCSV();
+            }
+        };
+        new Thread(runnable).start();
         return rootView;
     }
 

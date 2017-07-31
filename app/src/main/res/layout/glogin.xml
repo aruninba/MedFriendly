@@ -6,8 +6,6 @@
     android:orientation="vertical">
 
 
-
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,11 +14,15 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:id="@+id/logininitiate"
+        android:textColor="@color/white"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_gravity="bottom"
+        android:background="@drawable/roundcorners"
+        android:textSize="20dp"
         android:text="Login" />
-
 
     <include layout="@layout/loginbuttons" />
 
