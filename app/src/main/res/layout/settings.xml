@@ -35,7 +35,7 @@
                     android:layout_width="0dp"
                     android:layout_height="25dp"
                     android:layout_weight="0.5"
-                    android:src="@drawable/dashboard_icon"/>
+                    android:src="@drawable/callhelp_icon"/>
 
                 <utilities.CustomText
                     android:layout_width="0dp"
@@ -77,7 +77,7 @@
                     android:layout_width="0dp"
                     android:layout_height="25dp"
                     android:layout_weight="0.5"
-                    android:src="@drawable/treatment_icon"/>
+                    android:src="@drawable/profile_icon"/>
 
                 <utilities.CustomText
                     android:layout_width="0dp"

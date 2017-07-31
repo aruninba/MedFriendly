@@ -42,10 +42,12 @@ import static android.support.v4.app.ActivityCompat.requestPermissions;
 public class DialysisAdapter extends BaseAdapter {
     Context context;
     ArrayList<Dialysis> dialysises;
+    SimpleDateFormat sdf;
 
     public DialysisAdapter(Context context, ArrayList<Dialysis> dialysises) {
         this.context = context;
         this.dialysises = dialysises;
+        sdf = new SimpleDateFormat("dd-MM-yyyy");
     }
 
 
@@ -88,7 +90,7 @@ public class DialysisAdapter extends BaseAdapter {
         String weekdays[] = dfs.getWeekdays();
         String nameOfDay = weekdays[Integer.valueOf(dialysis.getDay())];
 
-        holder.day.setText(nameOfDay+ " @ " + dialysis.getTime());
+        holder.day.setText(nameOfDay+"["+getDate(dialysis)+"]"+ " @ " + dialysis.getTime());
         holder.hospital.setText(dialysis.getHospital());
 
         holder.map.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +139,7 @@ public class DialysisAdapter extends BaseAdapter {
                         intent.setData(Uri.parse("tel:" +dialysis.getHospitalPhone()));
                     }
                     if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        showSnack(holder.coordinatorLayoutinf,"Please enable permission in settings to call!");
+                        showSnack(holder.coordinatorLayoutinf,"Please enable permission in settings_icon to call!");
                         return;
                     }
                     context.startActivity(intent);
@@ -145,6 +147,28 @@ public class DialysisAdapter extends BaseAdapter {
             }
         });
         return convertView;
+    }
+
+    private String getDate(Dialysis dialysis) {
+        String date= null;
+        Calendar calendar = Calendar.getInstance();
+        int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+            if (currentDay == Integer.valueOf(dialysis.getDay())) {
+                date = sdf.format(calendar.getTime());
+            } else {
+                if (currentDay < Integer.valueOf(dialysis.getDay())) {
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(Calendar.DAY_OF_WEEK, Integer.valueOf(dialysis.getDay()));
+                    date = sdf.format(cal.getTime());
+                } else {
+                    Calendar cal = Calendar.getInstance();
+                    int i = cal.get(Calendar.WEEK_OF_MONTH);
+                    cal.set(Calendar.WEEK_OF_MONTH, ++i);
+                    cal.set(Calendar.DAY_OF_WEEK, Integer.valueOf(dialysis.getDay()));
+                    date =  sdf.format(cal.getTime());
+                }
+            }
+        return date;
     }
 
     private void showSnack(CoordinatorLayout coordinatorLayoutinf, String msg){

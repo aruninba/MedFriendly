@@ -85,9 +85,9 @@ public class FragmentDrawer extends Fragment {
         images.add(R.drawable.waterintake_icon);
         images.add(R.drawable.calculator_icon);
         images.add(R.drawable.dialysis_icon);
-        images.add(R.drawable.callhelp_icon);
-        images.add(R.drawable.treatment_icon);
-        images.add(R.drawable.callhelp_icon);
+        images.add(R.drawable.hospitalicon);
+        /*images.add(R.drawable.treatment_icon);*/
+        images.add(R.drawable.settings_icon);
       /*  images.add(R.drawable.user_icon);*/
 
 

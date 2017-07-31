@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <AutoCompleteutilities.CustomText
+                    <AutoCompleteTextView
                         android:id="@+id/medication_edt"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                         android:textSize="18dp">
 
                         <requestFocus />
-                    </AutoCompleteutilities.CustomText>
+                    </AutoCompleteTextView>
 
                 </LinearLayout>
 
@@ -405,8 +405,5 @@
 
 
         </LinearLayout>
-
     </ScrollView>
-
-
 </android.support.design.widget.CoordinatorLayout>

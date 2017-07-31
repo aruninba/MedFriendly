@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -20,6 +21,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +31,18 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -44,7 +58,7 @@ import utilities.Utils;
  * Created by arun_i on 25-Jul-17.
  */
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements  GoogleApiClient.OnConnectionFailedListener {
     private ImageView profileView;
     private Toolbar toolbar;
     private EditText nameEt, phoneEt, emailEt;
@@ -53,19 +67,30 @@ public class Profile extends AppCompatActivity {
     Uri fileUri;
     Bitmap bitmap;
     private CoordinatorLayout coordinatorLayout;
-
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.profile);
         initialize();
         initCollapsingToolbar();
+
     }
 
     private void initialize() {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbarProfile);
@@ -180,7 +205,7 @@ public class Profile extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_save, menu);
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
     }
 
@@ -193,10 +218,45 @@ public class Profile extends AppCompatActivity {
             case R.id.save_reminder:
                 saveProfile();
                 return true;
+
+            case R.id.logout:
+                doLogout();
+                return true;
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void doLogout() {
+            if(globalpreferences.getString("loginby").equalsIgnoreCase("google")){
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                        new ResultCallback<Status>() {
+                            @Override
+                            public void onResult(Status status) {
+                                logoutSuccess();
+                            }
+                        });
+            }else{
+                if (AccessToken.getCurrentAccessToken() == null) {
+                    return; // already logged out
+                }
+                new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                        .Callback() {
+                    @Override
+                    public void onCompleted(GraphResponse graphResponse) {
+                        LoginManager.getInstance().logOut();
+                        logoutSuccess();
+                    }
+                }).executeAsync();
+            }
+    }
+
+    private void logoutSuccess() {
+        globalpreferences.putString("username","");
+        Intent in = new Intent(Profile.this, Login.class);
+        in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(in);
     }
 
     private void saveProfile() {
@@ -267,5 +327,12 @@ public class Profile extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
+        // be available.
+    }
+
 
 }

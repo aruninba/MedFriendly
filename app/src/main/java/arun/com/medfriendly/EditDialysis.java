@@ -190,25 +190,25 @@ public class EditDialysis extends AppCompatActivity implements View.OnClickListe
     private void setSelectedButton(int day) {
         selectedDay = day;
         switch (day) {
-            case 0:
+            case 1:
                 setDayBackground(sunBtn);
                 break;
-            case 1:
+            case 2:
                 setDayBackground(monBtn);
                 break;
-            case 2:
+            case 3:
                 setDayBackground(tuesBtn);
                 break;
-            case 3:
+            case 4:
                 setDayBackground(wedBtn);
                 break;
-            case 4:
+            case 5:
                 setDayBackground(thuBtn);
                 break;
-            case 5:
+            case 6:
                 setDayBackground(friBtn);
                 break;
-            case 6:
+            case 7:
                 setDayBackground(satBtn);
                 break;
             default:

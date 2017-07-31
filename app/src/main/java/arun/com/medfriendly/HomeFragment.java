@@ -29,7 +29,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
@@ -56,7 +56,7 @@ import utilities.Globalpreferences;
 import static arun.com.medfriendly.R.id.imageView;
 
 
-public class HomeFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class HomeFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
 
     View rootView;
     private TextView dialysisRemind;
@@ -175,20 +175,20 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
         int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
         outerloop:
         for (int t = 0; t < dialysisReminder.size(); t++) {
-            if (currentDay == Integer.valueOf(dialysisReminder.get(0).getDay())) {
-                dialysisRemind.setText("Hi Arun, \n your next dialysis is Today");
+            if (currentDay == Integer.valueOf(dialysisReminder.get(t).getDay())) {
+                dialysisRemind.setText("Hi Arun, \n your dialysis is Today");
                 break outerloop;
             } else {
-                if (currentDay > Integer.valueOf(dialysisReminder.get(0).getDay())) {
+                if (currentDay < Integer.valueOf(dialysisReminder.get(t).getDay())) {
                     Calendar cal = Calendar.getInstance();
-                    int i = cal.get(Calendar.WEEK_OF_MONTH);
-                    cal.set(Calendar.WEEK_OF_MONTH, ++i);
-                    cal.set(Calendar.DAY_OF_WEEK, Integer.valueOf(dialysisReminder.get(0).getDay()));
+                    cal.set(Calendar.DAY_OF_WEEK, Integer.valueOf(dialysisReminder.get(t).getDay()));
                     dialysisRemind.setText("Hi Arun, \n your next dialysis is on " + sdf.format(cal.getTime()));
                     break outerloop;
                 } else {
                     Calendar cal = Calendar.getInstance();
-                    cal.set(Calendar.DAY_OF_WEEK, Integer.valueOf(dialysisReminder.get(0).getDay()));
+                    int i = cal.get(Calendar.WEEK_OF_MONTH);
+                    cal.set(Calendar.WEEK_OF_MONTH, ++i);
+                    cal.set(Calendar.DAY_OF_WEEK, Integer.valueOf(dialysisReminder.get(t).getDay()));
                     dialysisRemind.setText("Hi Arun, \n your next dialysis is on " + sdf.format(cal.getTime()));
                     break outerloop;
                 }
@@ -219,10 +219,14 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
         calendar = Calendar.getInstance();
         date = sdf.format(calendar.getTime());
 
-        /*mAdView = (AdView) rootView.findViewById(R.id.adView);
+        Bundle extras = new Bundle();
+        extras.putBoolean("is_designed_for_families", true);
+
+        mAdView = (AdView) rootView.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
+         .addNetworkExtrasBundle(AdMobAdapter.class, extras)
                 .build();
-        mAdView.loadAd(adRequest);*/
+        mAdView.loadAd(adRequest);
     }
 
     public static int getFinishedColor() {
@@ -319,7 +323,7 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
             currentLatitude = location.getLatitude();
             currentLongitude = location.getLongitude();
 
-            Toast.makeText(getActivity(), currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
+       //     Toast.makeText(getActivity(), currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -357,4 +361,5 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
         currentLatitude = location.getLatitude();
         currentLongitude = location.getLongitude();
     }
+
 }

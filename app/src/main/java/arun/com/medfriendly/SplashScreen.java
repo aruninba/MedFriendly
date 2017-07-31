@@ -5,26 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
-import android.util.Log;
-import android.view.View;
+import android.text.TextUtils;
 
 import com.crashlytics.android.Crashlytics;
-import com.facebook.internal.Utility;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import io.fabric.sdk.android.Fabric;
 import utilities.Config;
+import utilities.Globalpreferences;
 import utilities.NotificationUtils;
 
 /**
@@ -33,11 +25,13 @@ import utilities.NotificationUtils;
 
 public class SplashScreen extends AppCompatActivity {
     private BroadcastReceiver mRegistrationBroadcastReceiver;
+    private Globalpreferences globalpreferences;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.splashscreen);
+        globalpreferences = Globalpreferences.getInstances(SplashScreen.this);
         ShimmerFrameLayout layout = (ShimmerFrameLayout) findViewById(R.id.shimmerlayout);
         layout.startShimmerAnimation();
         registerFCM();
@@ -45,7 +39,11 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(3000);
-                    startActivity(new Intent(SplashScreen.this, GLogin.class));
+                    if(!TextUtils.isEmpty(globalpreferences.getString("username"))){
+                        startActivity(new Intent(SplashScreen.this, MainNavigationDrawer.class));
+                    }else {
+                        startActivity(new Intent(SplashScreen.this, Login.class));
+                    }
                     finish();
                 } catch (Exception e) {
                     e.printStackTrace();

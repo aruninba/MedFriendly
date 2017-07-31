@@ -88,28 +88,22 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
                 break;
 
             case 5:
-                fragment = new UFcalculator();
+                fragment = new HospitalsFragment();
                 globalpreferences.putString("selectedClass", "Hospitals");
-                title = "Hospitals";
+                title = "HospitalsFragment";
 
                 break;
-            case 6:
+            /*case 6:
                 fragment = new UFcalculator();
                 globalpreferences.putString("selectedClass", "Treatment Monitor");
                 title = "Treatment Monitor";
 
-                break;
-            case 7:
+                break;*/
+            case 6:
                 fragment = new Settings();
                 globalpreferences.putString("selectedClass", "Settings");
                 title = "Settings";
                 break;
-            case 8:
-
-               /* fragment = new Profile();
-                globalpreferences.putString("selectedClass","Profile");
-                title = "Profile";
-                break;*/
 
 
             default:

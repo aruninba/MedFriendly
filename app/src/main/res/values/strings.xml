@@ -9,7 +9,7 @@
         <item>UF calculator</item>
         <item>Dialysis</item>
         <item>Hospitals</item>
-        <item>Treatment Monitor</item>
+        <!--<item>Treatment Monitor</item>-->
         <item>Settings</item>
     </string-array>
     <string name="drawer_open">Open</string>
@@ -23,4 +23,5 @@
 
     <string name="firstadd">ca-app-pub-5196489113179685/7569362245</string>
     <string name="firstleveladd">ca-app-pub-5196489113179685/7023239786</string>
+    <string name="testadd">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

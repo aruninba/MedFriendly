@@ -22,11 +22,11 @@
             android:padding="@dimen/activity_horizontal_margin">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="10dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_phone_black" />
+                android:src="@drawable/user_profile" />
 
             <EditText
                 android:id="@+id/nameEt"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Arun Inbasekaran"
                 android:background="@null"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#212121" />
 
@@ -48,9 +48,9 @@
             android:padding="@dimen/activity_horizontal_margin">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="10dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_phone_black" />
 
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:hint="(123) 456-7890"
                 android:background="@null"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#212121" />
 
@@ -74,11 +74,11 @@
             android:padding="@dimen/activity_horizontal_margin">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="10dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_phone_black" />
+                android:src="@drawable/mail_profile" />
 
             <EditText
                 android:id="@+id/emailEt"
@@ -86,12 +86,14 @@
                 android:layout_height="wrap_content"
                 android:hint="arun.samurai89@gmail.com"
                 android:background="@null"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#212121" />
 
         </LinearLayout>
 
+
     </LinearLayout>
+
 
 </android.support.v4.widget.NestedScrollView>
