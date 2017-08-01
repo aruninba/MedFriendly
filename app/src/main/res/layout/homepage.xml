@@ -8,16 +8,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:layout_marginTop="20dp">
 
         <android.support.v7.widget.CardView
+            android:id="@+id/namecard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="10dp"
             android:background="#FFFFFF"
             android:orientation="vertical"
             android:padding="10dp"
@@ -35,119 +35,106 @@
 
         </android.support.v7.widget.CardView>
 
-        <LinearLayout
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/watercard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_height="180dp"
+            android:layout_below="@+id/namecard"
+            android:layout_margin="10dp"
+            android:background="#bb0053"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            cardview:cardCornerRadius="2dp"
+            cardview:contentPadding="8dp">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_below="@id/namecard"
+                android:background="#bb0053"
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                android:gravity="center">
+
+
+                <utilities.CustomText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/circular_progress"
+                    android:text="water intake hvvdhdhhbdhbhdbhvdvhvhvhhd"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+
+                <utilities.CircleProgress
+                    android:id="@+id/circular_progress"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:background="@color/white"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    cardview:cardCornerRadius="2dp"
-                    cardview:contentPadding="8dp">
+                    android:backgroundTint="#0066FF"
+                    android:backgroundTintMode="add"
+                    custom:donut_finished_color="#FF0000"
+                    custom:donut_finished_stroke_width="15dp"
+                    custom:donut_inner_drawable="@drawable/ic_star_black_48dp"
+                    custom:donut_show_text="false"
+                    custom:donut_unfinished_color="@color/primary_material_light"
+                    custom:donut_unfinished_stroke_width="15dp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
+            </RelativeLayout>
 
-                        <utilities.CustomText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:text="water intake"
-                            android:textColor="@color/black"
-                            android:textSize="18dp" />
+        </android.support.v7.widget.CardView>
 
 
-                        <utilities.CircleProgress
-                            android:id="@+id/circular_progress"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:backgroundTint="#0066FF"
-                            android:backgroundTintMode="add"
-                            custom:donut_finished_color="#FF0000"
-                            custom:donut_finished_stroke_width="15dp"
-                            custom:donut_inner_drawable="@drawable/ic_star_black_48dp"
-                            custom:donut_show_text="false"
-                            custom:donut_unfinished_color="@color/primary_material_light"
-                            custom:donut_unfinished_stroke_width="15dp" />
-                    </LinearLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_below="@id/watercard"
+            android:layout_margin="10dp"
+            android:background="#00768A"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            cardview:cardCornerRadius="2dp"
+            cardview:contentPadding="8dp">
 
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="#00768A"
+                android:orientation="horizontal">
 
-                <android.support.v7.widget.CardView
+                <utilities.CustomText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/emergency"
+                    android:text="Emergency Alert!dfdfdf"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+                <ImageView
+                    android:id="@+id/emergency"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:background="@color/white"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    cardview:cardCornerRadius="2dp"
-                    cardview:contentPadding="8dp">
+                    android:src="@drawable/emergency" />
+            </RelativeLayout>
 
-                <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/content"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:rb_color="#ffb2b2"
-                    app:rb_duration="3000"
-                    app:rb_radius="32dp"
-                    app:rb_rippleAmount="4"
-                    app:rb_scale="6">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <utilities.CustomText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:text="Emergency Alert!"
-                            android:textColor="@color/black"
-                            android:textSize="18dp" />
+        </android.support.v7.widget.CardView>
 
 
-                            <ImageView
-                                android:id="@+id/emergency"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:src="@drawable/emergency" />
-                    </LinearLayout>
-                </com.skyfishjy.library.RippleBackground>
-
-
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-
-
-        </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"

@@ -37,7 +37,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.skyfishjy.library.RippleBackground;
+
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -104,7 +104,6 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
         final Animation animShake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
 
         gpreferences = Globalpreferences.getInstances(getActivity());
-        final RippleBackground rippleBackground = (RippleBackground) rootView.findViewById(R.id.content);
         final ImageView imageView = (ImageView) rootView.findViewById(R.id.emergency);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,10 +113,10 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                     if (!(getActivity().checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) && !(getActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) && !(getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
                         requestPermissions(new String[]{android.Manifest.permission.SEND_SMS, android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, Constants.HOMEPERMISSION);
                     } else {
-                        showOption(imageView, animShake, rippleBackground);
+                        showOption(imageView, animShake);
                     }
                 } else {
-                    showOption(imageView, animShake, rippleBackground);
+                    showOption(imageView, animShake);
                 }
 
 
@@ -126,16 +125,14 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
         return rootView;
     }
 
-    private void showOption(final ImageView imageView, Animation animShake, final RippleBackground rippleBackground) {
+    private void showOption(final ImageView imageView, Animation animShake) {
         if (!TextUtils.isEmpty(gpreferences.getString("EmergencyNumber"))) {
             imageView.startAnimation(animShake);
-            rippleBackground.startRippleAnimation();
             Handler han = new Handler();
             han.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     imageView.clearAnimation();
-                    rippleBackground.stopRippleAnimation();
                 }
             }, 3000);
 

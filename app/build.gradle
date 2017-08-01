@@ -66,9 +66,9 @@ dependencies {
         transitive = true;
     }
     compile 'com.flipboard:bottomsheet-core:1.5.3'
-    compile 'com.skyfishjy.ripplebackground:library:1.0.1'
     compile 'com.google.android.gms:play-services:10.0.1'
     compile 'com.android.support:multidex:1.0.0'
+
 
 }
 
