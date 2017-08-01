@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "747475396340-h96cna726k2287iud8mbfkotjb3h9ou6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "arun.com.medfriendly",
+            "certificate_hash": "70464a0b1ec9828e351bba68ecf9841b554b65c1"
+          }
+        },
+        {
           "client_id": "747475396340-07595knikomd0ua8915kitk279fg2fu8.apps.googleusercontent.com",
           "client_type": 3
         },

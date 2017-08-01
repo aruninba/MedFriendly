@@ -37,6 +37,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.vision.text.Text;
 
 
 import java.text.SimpleDateFormat;
@@ -59,7 +60,7 @@ import static arun.com.medfriendly.R.id.imageView;
 public class HomeFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
 
     View rootView;
-    private TextView dialysisRemind;
+    private TextView dialysisRemind, welcomeTv, addDialysisTv;
     private CircleProgress circleProgress;
     private FloatingActionButton fab;
     DatabaseHelper dbHelper;
@@ -78,6 +79,7 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
     private LocationRequest mLocationRequest;
     private double currentLatitude;
     private double currentLongitude;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.homepage, container, false);
@@ -103,7 +105,7 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
 
         final Animation animShake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
 
-        gpreferences = Globalpreferences.getInstances(getActivity());
+
         final ImageView imageView = (ImageView) rootView.findViewById(R.id.emergency);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,23 +172,29 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
         dialysisReminder.clear();
         dialysisReminder = dbHelper.getDialysis();
         int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+        if(dialysisReminder.isEmpty()){
+            dialysisRemind.setText("you haven't set your dialysis reminder. set the reminder to get help!");
+            addDialysisTv.setText("+ Add Now");
+        }else{
+            addDialysisTv.setText("+ Edit");
+        }
         outerloop:
         for (int t = 0; t < dialysisReminder.size(); t++) {
             if (currentDay == Integer.valueOf(dialysisReminder.get(t).getDay())) {
-                dialysisRemind.setText("Hi Arun, \n your dialysis is Today");
+                dialysisRemind.setText("your dialysis is Today");
                 break outerloop;
             } else {
                 if (currentDay < Integer.valueOf(dialysisReminder.get(t).getDay())) {
                     Calendar cal = Calendar.getInstance();
                     cal.set(Calendar.DAY_OF_WEEK, Integer.valueOf(dialysisReminder.get(t).getDay()));
-                    dialysisRemind.setText("Hi Arun, \n your next dialysis is on " + sdf.format(cal.getTime()));
+                    dialysisRemind.setText("your next dialysis is on " + sdf.format(cal.getTime()));
                     break outerloop;
                 } else {
                     Calendar cal = Calendar.getInstance();
                     int i = cal.get(Calendar.WEEK_OF_MONTH);
                     cal.set(Calendar.WEEK_OF_MONTH, ++i);
                     cal.set(Calendar.DAY_OF_WEEK, Integer.valueOf(dialysisReminder.get(t).getDay()));
-                    dialysisRemind.setText("Hi Arun, \n your next dialysis is on " + sdf.format(cal.getTime()));
+                    dialysisRemind.setText("your next dialysis is on " + sdf.format(cal.getTime()));
                     break outerloop;
                 }
             }
@@ -208,7 +216,10 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
 
 
     private void initialize() {
+        gpreferences = Globalpreferences.getInstances(getActivity());
         dialysisRemind = (TextView) rootView.findViewById(R.id.remindDialysis);
+        welcomeTv = (TextView) rootView.findViewById(R.id.welcomeTv);
+        addDialysisTv = (TextView) rootView.findViewById(R.id.addDialysisTv);
         circleProgress = (CircleProgress) rootView.findViewById(R.id.circular_progress);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fabWaterPlus);
         dbHelper = new DatabaseHelper(getActivity());
@@ -221,9 +232,12 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
 
         mAdView = (AdView) rootView.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
-         .addNetworkExtrasBundle(AdMobAdapter.class, extras)
+       //  .addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
+
+        welcomeTv.setText("Welcome Back, "+gpreferences.getString("username"));
     }
 
     public static int getFinishedColor() {
