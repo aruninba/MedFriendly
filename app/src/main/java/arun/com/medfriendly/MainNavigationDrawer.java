@@ -87,10 +87,17 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
 
                 break;
 
-            case 5:
+            /*case 5:
+                fragment = new DoctorsFragment();
+                globalpreferences.putString("selectedClass", "Doctors");
+                title = "Doctors";
+
+                break;*/
+
+            case 6:
                 fragment = new HospitalsFragment();
                 globalpreferences.putString("selectedClass", "Hospitals");
-                title = "HospitalsFragment";
+                title = "Hospitals";
 
                 break;
             /*case 6:
@@ -99,7 +106,7 @@ public class MainNavigationDrawer extends AppCompatActivity implements FragmentD
                 title = "Treatment Monitor";
 
                 break;*/
-            case 6:
+            case 7:
                 fragment = new Settings();
                 globalpreferences.putString("selectedClass", "Settings");
                 title = "Settings";

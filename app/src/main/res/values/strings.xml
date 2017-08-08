@@ -8,6 +8,7 @@
         <item>Water intake</item>
         <item>UF calculator</item>
         <item>Dialysis</item>
+        <!--<item>Doctors</item>-->
         <item>Hospitals</item>
         <!--<item>Treatment Monitor</item>-->
         <item>Settings</item>
@@ -20,8 +21,58 @@
     <string name="fb_login_protocol_scheme">fb511250552545146</string>
 
 
+    <string-array name="city_list">
+        <item>Arcot</item>
+        <item>Bhavani</item>
+        <item>Chennai</item>
+        <item>Coimbatore</item>
+        <item>Coonoor</item>
+        <item>Cuddalore</item>
+        <item>Dindigul</item>
+        <item>Erode</item>
+        <item>Gudiyatham</item>
+        <item>Kancheepuram</item>
+        <item>Karaikkudi</item>
+        <item>Karur</item>
+        <item>Kumbakonam</item>
+        <item>Madurai</item>
+        <item>Nagercoil</item>
+        <item>Neyveli</item>
+        <item>Pollachi</item>
+        <item>Pudukkottai</item>
+        <item>Rajapalayam</item>
+        <item>Salem</item>
+        <item>Sivakasi</item>
+        <item>Thanjavur</item>
+        <item>Thoothukkudi</item>
+        <item>Tiruchirappalli</item>
+        <item>Tirunelveli</item>
+        <item>Tiruppur</item>
+        <item>Tiruvannamalai</item>
+        <item>Vaniyambadi</item>
+        <item>Vellore</item>
+    </string-array>
+
+
 
     <string name="firstadd">ca-app-pub-5196489113179685/7569362245</string>
     <string name="firstleveladd">ca-app-pub-5196489113179685/7023239786</string>
     <string name="testadd">ca-app-pub-3940256099942544/6300978111</string>
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Helpful Alerts!</string>
+    <string name="slide_1_desc">A Reminder to help you take medicine on time!</string>
+
+    <string name="slide_2_title">Water Intake Monitor</string>
+    <string name="slide_2_desc">Monitor the amount of water you intake everyday!</string>
+
+    <string name="slide_3_title">UF Calculator</string>
+    <string name="slide_3_desc">Calculate the amount of fluid to be removed in dialysis!</string>
+
+    <string name="slide_4_title">Locate Hospital</string>
+    <string name="slide_4_desc">Find hospitals near by your location on a tap!</string>
+
 </resources>

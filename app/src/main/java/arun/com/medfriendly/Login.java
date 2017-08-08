@@ -109,6 +109,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                                     globalpreferences.putString("photo", ing);
                                     Intent in = new Intent(Login.this, MainNavigationDrawer.class);
                                     startActivity(in);
+                                    finish();
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -151,6 +152,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
             Intent in = new Intent(Login.this, MainNavigationDrawer.class);
             startActivity(in);
+            finish();
 
         } else {
             // Signed out, show unauthenticated UI.

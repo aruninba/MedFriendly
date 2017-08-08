@@ -39,10 +39,16 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(3000);
-                    if(!TextUtils.isEmpty(globalpreferences.getString("username"))){
-                        startActivity(new Intent(SplashScreen.this, MainNavigationDrawer.class));
+                    if(globalpreferences.getBoolean("isFirstLaunch")){
+                        startActivity(new Intent(SplashScreen.this, WelcomeActivity.class));
+                        globalpreferences.putBoolean("isFirstLaunch",false);
+
                     }else {
-                        startActivity(new Intent(SplashScreen.this, Login.class));
+                        if (!TextUtils.isEmpty(globalpreferences.getString("username"))) {
+                            startActivity(new Intent(SplashScreen.this, MainNavigationDrawer.class));
+                        } else {
+                            startActivity(new Intent(SplashScreen.this, Login.class));
+                        }
                     }
                     finish();
                 } catch (Exception e) {

@@ -29,6 +29,19 @@ public class Globalpreferences {
         prefsEditor.commit();
     }
 
+    public void putBoolean(String key, Boolean value){
+        SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+        prefsEditor.putBoolean(key, value);
+        prefsEditor.commit();
+    }
+
+    public Boolean getBoolean(String key) {
+        if (sharedPreferences != null) {
+            return sharedPreferences.getBoolean(key, true);
+        }
+        return true;
+    }
+
     public String getString(String key) {
         if (sharedPreferences != null) {
             return sharedPreferences.getString(key, "");

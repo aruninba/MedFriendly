@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,12 +21,14 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
     String googlePlacesData;
     GoogleMap mMap;
     String url;
-
+public static List<HashMap<String, String>> nearbyPlacesList_public= new ArrayList<>();
     @Override
     protected String doInBackground(Object... params) {
         try {
             Log.d("GetNearbyPlacesData", "doInBackground entered");
-            mMap = (GoogleMap) params[0];
+            if(params[0]!= null) {
+                mMap = (GoogleMap) params[0];
+            }
             url = (String) params[1];
             DownloadUrl downloadUrl = new DownloadUrl();
             googlePlacesData = downloadUrl.readUrl(url);
@@ -42,8 +45,13 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
         List<HashMap<String, String>> nearbyPlacesList = null;
         DataParser dataParser = new DataParser();
         nearbyPlacesList =  dataParser.parse(result);
-        ShowNearbyPlaces(nearbyPlacesList);
-        Log.d("GooglePlacesReadTask", "onPostExecute Exit");
+        if(mMap != null) {
+            ShowNearbyPlaces(nearbyPlacesList);
+            Log.d("GooglePlacesReadTask", "onPostExecute Exit");
+        }else{
+            nearbyPlacesList_public = dataParser.parse(result);
+            System.out.println("result size::"+nearbyPlacesList_public.size());
+        }
     }
 
     private void ShowNearbyPlaces(List<HashMap<String, String>> nearbyPlacesList) {
